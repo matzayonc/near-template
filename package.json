@@ -1,0 +1,36 @@
+{
+  "name": "near-template",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:contract && npm run build:sdk",
+    "build:sdk": "cd sdk && tsc",
+    "build:contract": "set -e && RUSTFLAGS='-C link-arg=-s' cargo build --target wasm32-unknown-unknown --release && mkdir -p ./out && cp target/wasm32-unknown-unknown/release/*.wasm ./out/template.wasm",
+    "test": "npm run test:test",
+    "test:test": "ts-mocha -t 60000 tests/test.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nightly-labs/template.git"
+  },
+  "author": "Mateusz Zając",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nightly-labs/template/issues"
+  },
+  "homepage": "https://github.com/nightly-labs/template#readme",
+  "dependencies": {
+    "bn.js": "^5.2.0",
+    "fs": "^0.0.1-security",
+    "near-api-js": "^0.44.2",
+    "ts-mocha": "^9.0.2",
+    "utils": "^0.3.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "^9.1.0",
+    "@types/node": "^17.0.25",
+    "chai": "^4.3.6",
+    "typescript": "^4.6.3"
+  }
+}
